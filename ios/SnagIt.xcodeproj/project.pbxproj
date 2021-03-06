@@ -234,7 +234,6 @@
 		521C44FE25EE0B0100D5F20C /* MazzardM-Light.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 521C442625EE0B0000D5F20C /* MazzardM-Light.woff2 */; };
 		521C44FF25EE0B0100D5F20C /* MazzardL-Thin.eot in Resources */ = {isa = PBXBuildFile; fileRef = 521C442725EE0B0000D5F20C /* MazzardL-Thin.eot */; };
 		521C450025EE0B0100D5F20C /* MazzardM-Medium.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 521C442825EE0B0100D5F20C /* MazzardM-Medium.woff2 */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		F7F3BA5F2851D355572A0260 /* libPods-SnagIt-SnagItTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A0F0DE8CD33A6BC2FE24309 /* libPods-SnagIt-SnagItTests.a */; };
 /* End PBXBuildFile section */
 
@@ -492,7 +491,6 @@
 		521C442825EE0B0100D5F20C /* MazzardM-Medium.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "MazzardM-Medium.woff2"; path = "../src/assets/font/MazzardM-Medium.woff2"; sourceTree = "<group>"; };
 		54EE5155F830677167D5BD0A /* Pods-SnagIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnagIt.debug.xcconfig"; path = "Target Support Files/Pods-SnagIt/Pods-SnagIt.debug.xcconfig"; sourceTree = "<group>"; };
 		5A0F0DE8CD33A6BC2FE24309 /* libPods-SnagIt-SnagItTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SnagIt-SnagItTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = SnagIt/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8FDE51E372D1CB7CE99F6447 /* libPods-SnagIt-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SnagIt-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9A5DE52E478E177967DE66D /* Pods-SnagIt-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnagIt-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-SnagIt-tvOSTests/Pods-SnagIt-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D17548469AC7AD670F1D3CC7 /* Pods-SnagIt-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnagIt-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-SnagIt-tvOS/Pods-SnagIt-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -562,7 +560,6 @@
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = SnagIt;
@@ -941,8 +938,8 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 6WXDM23AJV;
 						LastSwiftMigration = 1120;
+						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1204,7 +1201,6 @@
 				521C44FE25EE0B0100D5F20C /* MazzardM-Light.woff2 in Resources */,
 				521C44FF25EE0B0100D5F20C /* MazzardL-Thin.eot in Resources */,
 				521C450025EE0B0100D5F20C /* MazzardM-Medium.woff2 in Resources */,
-				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1519,8 +1515,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6WXDM23AJV;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = SnagIt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1531,6 +1528,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SnagIt;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1543,8 +1541,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6WXDM23AJV;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SnagIt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1554,6 +1553,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SnagIt;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

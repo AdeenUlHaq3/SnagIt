@@ -5,28 +5,31 @@ import {
   InputLeftIcon,
   InputRightIcon,
   SearchInput,
-  NothingFoundImage
+  NothingFoundImage,
 } from './StyledComponents'
+import { SafeAreaView, View } from 'react-native';
 import BottomSearch from '../../Components/BottomSearch'
 import searchIcon from '../../assets/search/search.png'
 import backIcon from '../../assets/search/back.png'
 import nothingFoundImage from '../../assets/search/nothingFound.png'
 const Search = () => {
   return (
-    <>
-    <Wrapper behavior='padding' >
-      <InputWrapper>
-        
-        <SearchInput placeholder="search" />
-        <InputLeftIcon source={backIcon} />
-        <InputRightIcon source={searchIcon} />
-      </InputWrapper>
+    <SafeAreaView style={{ backgroundColor: "#fff" }}>
+      <Wrapper behavior='padding' >
+        <InputWrapper>
 
-      <NothingFoundImage source={nothingFoundImage} />
-      <BottomSearch />  
-    </Wrapper>
-    
-    </>
+          <SearchInput placeholder="search" />
+          <InputLeftIcon source={backIcon} />
+          <InputRightIcon source={searchIcon} />
+        </InputWrapper>
+
+        <NothingFoundImage source={nothingFoundImage} />
+        <View style={{position: "absolute", bottom: 40}}>
+          <BottomSearch />
+        </View>
+      </Wrapper>
+
+    </SafeAreaView>
   );
 };
 

@@ -8,8 +8,8 @@ export const HomeWrapper = styled.View`
 export const CategoryWidgetRow = styled.ScrollView`
   flex-direction: row;
   height: 0px;
-  margin-top: -90px;
-  margin-bottom: -90px;
+  margin-top: -150px;
+  margin-bottom: -150px;
 `
 
 export const CategoryWidgetContainer = styled.TouchableOpacity`

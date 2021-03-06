@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import {View, Text, Image, TouchableOpacity, StatusBar, BackHandler} from 'react-native'
-import { 
+import { View, Text, Image, TouchableOpacity, StatusBar, BackHandler, ImageBackground } from 'react-native'
+import {
   Wrapper,
   TimeLeft,
   OrderStatusHeading,
@@ -8,8 +8,9 @@ import {
   GoToHomeButton
 } from './StyledComponents'
 import heroImage from '../../assets/images/order.png'
+import logo from '../../assets/general/mainLogo.png';
 import { useDispatch, useSelector } from 'react-redux'
-import {setFooterColor, setMinutesForReducer, setSecondsForReducer} from '../../redux/actionCreators'
+import { setFooterColor, setMinutesForReducer, setSecondsForReducer } from '../../redux/actionCreators'
 import { useIsFocused } from '@react-navigation/native';
 
 function FocusAwareStatusBar(props) {
@@ -18,22 +19,22 @@ function FocusAwareStatusBar(props) {
   return isFocused ? <StatusBar {...props} /> : null;
 }
 
-export default ({navigation}) => {
+export default ({ navigation }) => {
 
 
-  const [focus,setFocus] = useState(useIsFocused())
+  const [focus, setFocus] = useState(useIsFocused())
 
   const dispatch = useDispatch()
 
-  const {authedUser} = useSelector(state=>state.authedUser)
+  const { authedUser } = useSelector(state => state.authedUser)
 
-  const [orderStatus,setOrderStatus] = useState({
-    color:'#0AC3D1',
-    time:'10:00',
-    status: 'Snag it'
+  const [orderStatus, setOrderStatus] = useState({
+    color: '#0AC3D1',
+    time: '10:00',
+    status: "snag'n it"
   })
 
-  const { timeStampAtWhichOrderPlaced, isOrderInPlace, secondsInReducer, minutesInReducer } = useSelector(state => state.orderStatusReducer )
+  const { timeStampAtWhichOrderPlaced, isOrderInPlace, secondsInReducer, minutesInReducer } = useSelector(state => state.orderStatusReducer)
 
   // useEffect(()=>{
   //   focus && dispatch(setFooterColor(orderStatus.color))
@@ -53,34 +54,34 @@ export default ({navigation}) => {
 
   // },[])
 
-  useEffect(()=>{
-    
-    if(minutesInReducer>0 && minutesInReducer<=8){
+  useEffect(() => {
+
+    if (minutesInReducer > 0 && minutesInReducer <= 8) {
       setOrderStatus({
-        color:'#EDA920',
-        time:'08:00',
+        color: '#EDA920',
+        time: '08:00',
         status: 'Scootn Over!'
       })
     }
-    if(minutesInReducer==0 && secondsInReducer==0){
+    if (minutesInReducer == 0 && secondsInReducer == 0) {
       setOrderStatus({
-        color:'#D51E16',
-        time:'00:00',
+        color: '#D51E16',
+        time: '00:00',
         status: 'Arrived! ORDER COMPLETE!!'
       })
     }
-    
-  },[minutesInReducer])
+
+  }, [minutesInReducer])
 
 
-  if(!authedUser.token){
+  if (!authedUser.token) {
 
     return (
       <Wrapper color={orderStatus.color}>
         <View>
           <Text>Sign In required!</Text>
         </View>
-    </Wrapper>
+      </Wrapper>
 
     )
 
@@ -94,13 +95,17 @@ export default ({navigation}) => {
 
         {!isOrderInPlace && <Text>Currently there is no Order in placed!</Text>}
 
-        <Image source={heroImage} />
+        <View>
+          <Image source={heroImage} />
+          <Image resizeMode="contain" style={{ position: "absolute", top: "30%", width: 120, height: 120, alignSelf: "center"}} source={logo} />
+        </View>
+
 
         <OrderStatus>{orderStatus.status}</OrderStatus>
-        <TimeLeft>{minutesInReducer}:{secondsInReducer < 10 ?  `0${secondsInReducer}` : secondsInReducer}</TimeLeft>
+        <TimeLeft>{minutesInReducer}:{secondsInReducer < 10 ? `0${secondsInReducer}` : secondsInReducer}</TimeLeft>
 
-        <TouchableOpacity onPress={()=>navigation.navigate('HomeScreen')} >
-        <GoToHomeButton>Go To Home</GoToHomeButton>
+        <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')} >
+          <GoToHomeButton>Go To Home</GoToHomeButton>
         </TouchableOpacity>
 
       </Wrapper>

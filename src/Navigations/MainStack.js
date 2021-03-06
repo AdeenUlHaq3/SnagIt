@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {createStackNavigator} from '@react-navigation/stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
-import {Image, Text, TouchableOpacity, View} from 'react-native';
-import {drawerActions} from '../redux/actionCreators';
+import { useDispatch, useSelector } from 'react-redux';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { Image, Platform, Text, TouchableOpacity, View } from 'react-native';
+import { drawerActions } from '../redux/actionCreators';
 import Home from '../screens/Home';
 import Profile from '../screens/Profile';
 import Settings from '../screens/Settings';
@@ -35,107 +35,107 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const HomeScreen = () => {
-  const {authedUser} = useSelector(state => state.authedUser)
+  const { authedUser } = useSelector(state => state.authedUser)
   return (
-  <Tab.Navigator
-    initialRouteName="Home"
-    screenOptions={({ route }) => ({
-      tabBarIcon: ({ focused, color, size }) => {
-        let iconName;
+    <Tab.Navigator
+      initialRouteName="Home"
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
 
-        if (route.name === 'Home') {
-          iconName = homeTabIcon
-        } else if (route.name === 'Profile') {
-          iconName = profileTabIcon
-        } else if (route.name === 'PastOrders') {
-          iconName = historyTabIcon
+          if (route.name === 'Home') {
+            iconName = homeTabIcon
+          } else if (route.name === 'Profile') {
+            iconName = profileTabIcon
+          } else if (route.name === 'PastOrders') {
+            iconName = historyTabIcon
+          }
+
+          return <Image source={iconName} size={size} color={color} />;
+        },
+      })}
+      tabBarOptions={{
+        inactiveBackgroundColor: '#D51E16',
+        activeBackgroundColor: '#D51E16',
+        // paddingTop: 40,
+        showLabel: false,
+        tabStyle: { borderRightColor: 'white', borderRightWidth: 1, },
+        style: {
+          height: 92,
+          // position: 'relative',
+          // bottom: 0
         }
+      }}
 
-        return <Image source={iconName} size={size} color={color} />;
-      },
-    })}
-    tabBarOptions={{
-      inactiveBackgroundColor: '#D51E16',
-      activeBackgroundColor: '#D51E16',
-      paddingTop: 40,
-      showLabel: false,
-      tabStyle:{borderRightColor:'white', borderRightWidth:1,},
-      style:{
-        height:62,
-        position: 'relative',
-        bottom: 50
-      }
-    }}
+    >
 
-  >
-    
-    <Tab.Screen name="Profile" component={Profile} screenProps={{ loggedIn: authedUser.token?true:false }} />
-    <Tab.Screen name="Home" component={Home} />
-    <Tab.Screen name="PastOrders" component={PastOrders} />
-  </Tab.Navigator>
+      <Tab.Screen name="Profile" component={Profile} screenProps={{ loggedIn: authedUser.token ? true : false }} />
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="PastOrders" component={PastOrders} />
+    </Tab.Navigator>
   )
 }
 
-export default ({navigation}) => {
+export default ({ navigation }) => {
 
   const dispatch = useDispatch();
-  const {authedUser} = useSelector((state) => state.authedUser)
-  const {cart} = useSelector((state) => state.cartReducer)
-  const {footerColor} = useSelector(state => state.orderStatusReducer)
+  const { authedUser } = useSelector((state) => state.authedUser)
+  const { cart } = useSelector((state) => state.cartReducer)
+  const { footerColor } = useSelector(state => state.orderStatusReducer)
 
-  console.log("footerColor",footerColor)
+  console.log("footerColor", footerColor)
 
   // console.log("cart---",cart.length&&"reachedddd!!")
 
 
   const options = {
     headerLeft: () => (
-      <TouchableOpacity onPress={navigation.openDrawer} style={{marginLeft: 10}}>
+      <TouchableOpacity onPress={navigation.openDrawer} style={{ marginLeft: 10 }}>
         <Image source={hamburger} />
       </TouchableOpacity>
     ),
 
     headerTitle: props => {
       return (
-        <View style={{alignSelf: 'center', flex: 1}}>
+        <View style={{ alignSelf: 'center', flex: 1 }}>
           <Image
             resizeMode="cover"
             style={{
-            width: 131,
-            height: 56,
-            resizeMode:'contain',
+              width: 131,
+              height: 56,
+              resizeMode: 'contain',
             }}
             source={appLogo}
           />
-          </View>
+        </View>
       )
-    } ,
+    },
     headerStyle: {
       backgroundColor: '#D51E16',
-      height: 78,
+      height: Platform.OS == "ios" ? 110 : 78,
     },
 
 
     headerRight: () => (
-      <View style={{flexDirection: 'row', marginRight:8}} >
-      <TouchableOpacity
-        style={{marginTop:15}}
-        onPress={() => navigation.navigate('Search')}>
-        <Image source={searchIcon} />
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={{marginLeft:15,zIndex:1}}
-        onPress={() => dispatch(drawerActions.toggleRightDrawer())}>
-{
-    cart.length?
-    <Text style={{width:19,height:19,borderRadius:19,backgroundColor:'black',position:'absolute',color:'white',zIndex:10,fontSize:12,paddingLeft:6,top:0,right:0}}>{cart.length}</Text>
-    :
-    console.log('cart is empty')
-}
+      <View style={{ flexDirection: 'row', marginRight: 8 }} >
+        <TouchableOpacity
+          style={{ marginTop: 15 }}
+          onPress={() => navigation.navigate('Search')}>
+          <Image source={searchIcon} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{ marginLeft: 15, zIndex: 1 }}
+          onPress={() => dispatch(drawerActions.toggleRightDrawer())}>
+          {
+            cart.length ?
+              <Text style={{ width: 19, height: 19, borderRadius: 19, backgroundColor: 'black', position: 'absolute', color: 'white', zIndex: 10, fontSize: 12, paddingLeft: 6, top: 0, right: 0 }}>{cart.length}</Text>
+              :
+              console.log('cart is empty')
+          }
 
-        
-        <Image source={cartIcon} />
-      </TouchableOpacity>
+
+          <Image source={cartIcon} />
+        </TouchableOpacity>
       </View>
     ),
   };
@@ -143,25 +143,25 @@ export default ({navigation}) => {
   return (
     <>
       <Stack.Navigator >
-      <Stack.Screen options={options} name="HomeScreen" component={HomeScreen} />
-      <Stack.Screen options={{...options,headerShown:false}} name="ProductInformation" component={ProductInformation} />
-      <Stack.Screen options={options} name="Settings" component={Settings} />
-      <Stack.Screen options={options} name="AboutUs" component={AboutUs} />
-      <Stack.Screen options={options} name="ContactUs" component={ContactUs} />
-      <Stack.Screen options={options} name="TermsOfServices" component={TermsOfServices} />
-      <Stack.Screen options={{...options,headerShown:false}} name="OrderStatus" component={OrderStatus} />
-      <Stack.Screen options={{...options,headerShown:false}} name="EditProfile" component={EditProfile} />
-      <Stack.Screen options={{...options,headerShown:false}} name="ChangePassword" component={ChangePassword} />
-      <Stack.Screen options={options} name="PaymentMethod" component={PaymentMethod} />
-      <Stack.Screen options={{...options,headerShown:false}} name="OnlinePayment" component={OnlinePayment} />
-      <Stack.Screen options={options} name="PaypalScreen" component={PaypalScreen} />
-      <Stack.Screen options={{...options,headerShown:false}} name="CardDetail" component={CardDetail} />
-      <Stack.Screen options={{...options,headerShown:false}} name="Search" component={Search} />
-      <Stack.Screen options={{...options,headerShown:false}} name="SignIn" component={SignIn} />
-      <Stack.Screen options={{...options,headerShown:false}} name="CreateAccount" component={CreateAccount} />
+        <Stack.Screen options={options} name="HomeScreen" component={HomeScreen} />
+        <Stack.Screen options={{ ...options, headerShown: false }} name="ProductInformation" component={ProductInformation} />
+        <Stack.Screen options={options} name="Settings" component={Settings} />
+        <Stack.Screen options={options} name="AboutUs" component={AboutUs} />
+        <Stack.Screen options={options} name="ContactUs" component={ContactUs} />
+        <Stack.Screen options={options} name="TermsOfServices" component={TermsOfServices} />
+        <Stack.Screen options={{ ...options, headerShown: false }} name="OrderStatus" component={OrderStatus} />
+        <Stack.Screen options={{ ...options, headerShown: false }} name="EditProfile" component={EditProfile} />
+        <Stack.Screen options={{ ...options, headerShown: false }} name="ChangePassword" component={ChangePassword} />
+        <Stack.Screen options={options} name="PaymentMethod" component={PaymentMethod} />
+        <Stack.Screen options={{ ...options, headerShown: false }} name="OnlinePayment" component={OnlinePayment} />
+        <Stack.Screen options={options} name="PaypalScreen" component={PaypalScreen} />
+        <Stack.Screen options={{ ...options, headerShown: false }} name="CardDetail" component={CardDetail} />
+        <Stack.Screen options={{ ...options, headerShown: false }} name="Search" component={Search} />
+        <Stack.Screen options={{ ...options, headerShown: false }} name="SignIn" component={SignIn} />
+        <Stack.Screen options={{ ...options, headerShown: false }} name="CreateAccount" component={CreateAccount} />
       </Stack.Navigator>
-      <AppFooter bgColor={footerColor} />
-      </>
+      {/* <AppFooter bgColor={footerColor} /> */}
+    </>
   );
 };
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Image, TouchableOpacity, View } from 'react-native'
+import { Image, TouchableOpacity, View, SafeAreaView } from 'react-native'
 import {
   Wrapper,
   BackButton,
@@ -47,7 +47,7 @@ const OnlinePayment = (props) => {
   let allIds = _.pluck(userCards,'_id')
   console.log("allIds",allIds)
   return (
-    <View style={{flex:1}}>
+    <SafeAreaView style={{flex:1}}>
     <Wrapper 
     showsVerticalScrollIndicator={false}
     contentContainerStyle={{
@@ -98,7 +98,7 @@ const OnlinePayment = (props) => {
         </AddCard>
       </WrapperContent>
     </Wrapper>
-    </View>
+    </SafeAreaView>
   );
 };
 

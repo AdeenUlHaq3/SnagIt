@@ -30,6 +30,7 @@ export default ProductsHome = ({navigation, route, category}) => {
   const {cart, Total} = useSelector(state=>state.cartReducer)
   const {authedUser} = useSelector(state=>state.authedUser)
 
+  console.log(products, "ppprprprprrp");
   console.log("in producthomescreen", {allProducts, products})
 
   const [activeCategory, setActiveCategory] = useState(products[category])
@@ -177,10 +178,12 @@ export default ProductsHome = ({navigation, route, category}) => {
             <ProductsWrapper>
               {activeCategory.map((data,i)=>(
                 <ProductContainer key={i}>
-                  <TouchableOpacity onPress={()=>navigation.navigate('ProductInformation',{
+                  <TouchableOpacity onPress={()=>{navigation.navigate('ProductInformation',{
                   mode:'prodInfo',
                   prodInfo: data
-                  })} >
+                  });
+                  console.log(data, "data")
+                  }} >
                 <ProductInfoIcon onPress={()=>navigation.navigate('ProductInformation',{
                   mode:'prodInfo',
                   prodInfo: data
